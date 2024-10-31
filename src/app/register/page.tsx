@@ -7,12 +7,15 @@ import arrowIcon from "@/public/seta.png"; // Imagem da seta
 import React, { FormEvent } from 'react';
 import axios, { AxiosInstance } from 'axios';
 import { error } from "console";
+import { link } from "fs";
+import { useRouter } from 'next/router';
 
 export default function Login() {
 
     const handleClickRegister = (event: FormEvent<HTMLFormElement>) =>{
         
         event.preventDefault();
+        const router = useRouter();
 
         const form = event.currentTarget;
         const formData = new FormData(form);
@@ -26,7 +29,7 @@ export default function Login() {
           password: formData.get('password'),
         };
 
-        axios.post("http://127.0.0.1:8000/adms/adms/create", {
+        axios.post("http://127.0.0.1:8000/adms/adms/create/", {
             id: values.id,
             nome: values.nome,
             empresa_pertencente: values.empresa_pertencente,
@@ -37,9 +40,14 @@ export default function Login() {
 
         }).then((response: any) => {
             console.log(response);
+            if (response.status === 201) {
+                router.push('/login');
+            }
         }).catch((error: any) => {
             console.log(error);
-        })
+            
+            
+        }) 
     }
 
     // Função para lidar com o envio do formulár
@@ -106,7 +114,7 @@ export default function Login() {
                                 name="id_empresa_pertencente"
                                 placeholder="Qual o Id?"
                                 className="border border-gray-300 px-4 py-2 rounded-lg w-40 focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
-                                required // Adiciona um campo obrigatório
+                                
                             />
                             <input
                                 type="text"
@@ -120,7 +128,7 @@ export default function Login() {
                                 name="id"
                                 placeholder="id"
                                 className="border border-gray-300 px-4 py-2 rounded-lg w-40 focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
-                                required // Adiciona um campo obrigatório
+                                
                             />
 
                             {/* Botão de envio */}
