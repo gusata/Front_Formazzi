@@ -11,8 +11,8 @@ import { useRouter } from 'next/router';
 export default function Login() {
     
 
-    const handleClickRegister = (event: FormEvent<HTMLFormElement>) => {
-        const router = useRouter();
+    const HandleClickRegister = (event: FormEvent<HTMLFormElement>) => {
+        const Router = useRouter();
         event.preventDefault();
 
         const form = event.currentTarget;
@@ -31,7 +31,7 @@ export default function Login() {
             .then((response: any) => {
                 console.log(response);
                 if (response.status === 201) {
-                    router.push('/login');
+                    Router.push('/login');
                 }
             })
             .catch((error: any) => {
@@ -62,7 +62,7 @@ export default function Login() {
                             <div className="text-center font-crimson text-xl md:text-2xl font-bold tracking-wide mb-4">
                                 Registre-se
                             </div>
-                            <form onSubmit={handleClickRegister} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <form onSubmit={HandleClickRegister} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <input
                                     type="email"
                                     name="email"
