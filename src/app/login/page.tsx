@@ -8,8 +8,8 @@ import React from "react";
 
 export default function Login() {
     function changevisiformadm(){
-        let formadm = document.getElementById('form-adm');
-        let formfunc = document.getElementById('form-func');
+        const formadm = document.getElementById('form-adm');
+        const formfunc = document.getElementById('form-func');
         formadm?.classList.toggle('hidden');
         formfunc?.classList.toggle('hidden');
     }

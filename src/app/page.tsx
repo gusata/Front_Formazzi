@@ -1,13 +1,11 @@
 import Image from "next/image";
-import { Inter } from "next/font/google";
 import intro from "@/public/intro.png";
 import logo from "@/public/logo.svg";
 import foguete from "@/public/foguete.png";
-import { useEffect } from "react";
+
 import FlareCursor from "./components/cursor/cursor";
 import Link from "next/link";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
