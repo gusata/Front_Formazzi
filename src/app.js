@@ -1,5 +1,5 @@
-const express = require('express');
-const cors = require('cors');
+import * as express from require('express');
+import * as cors from require('cors');
 const app = express();
 
 app.use(cors({
