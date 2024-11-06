@@ -17,7 +17,7 @@ export default function Navbar({ role }: NavbarProps) {
   const getNavigationLinks = () => {
     if (role === 'adm') {
       return [
-        { label: 'Início', path: '/workpage-func', icon: <Home /> },
+        { label: 'Início', path: '/workpage-adm', icon: <Home /> },
         { label: 'Chats', path: '/chats', icon: <MessageCircle /> },
         { label: 'Meus Cursos', path: '/couses', icon: <LandPlot /> },
         { label: 'Funcionários', path: '/empresa', icon: <Building2 /> },

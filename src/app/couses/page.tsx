@@ -12,7 +12,7 @@ export default function Courses() {
   
 
   useEffect(() => {
-    const storedCourses = JSON.parse(localStorage.getItem("courses")) || [];
+    const storedCourses = JSON.parse(localStorage.getItem("courses")!) || [];
     setCourses(storedCourses);
   }, []);
 
