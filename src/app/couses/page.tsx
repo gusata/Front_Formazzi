@@ -2,7 +2,6 @@
 'use client'
 // pages/courses.js
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { FiEdit, FiPlus, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import Navbar from "../components/barra lateral/nav";
 import Link from "next/link";

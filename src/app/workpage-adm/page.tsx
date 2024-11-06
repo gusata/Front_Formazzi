@@ -1,8 +1,6 @@
-import Image from "next/image";
 import Head from "next/head";
-import Link from "next/link";
 import Navbar from "../components/barra lateral/nav";
-import { Alert, Dropdown } from "flowbite-react";
+
 
 export default function Dashboard() {
   return (
