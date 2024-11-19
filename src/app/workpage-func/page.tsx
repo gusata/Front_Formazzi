@@ -1,81 +1,104 @@
-
+'use client'
+// pages/dashboard.js
+import { useEffect, useState } from "react";
+import Navbar from "../components/barra lateral/nav";
 import Head from "next/head";
 import Link from "next/link";
-import Navbar from "../components/barra lateral/nav";
+import wallpaper2 from "@/public/wallpaper2.png"
+
 
 export default function Dashboard() {
+  const [assignedCourses, setAssignedCourses] = useState([]);
+  const [company, setCompany] = useState(null);
 
+  useEffect(() => {
+    const storedCourses = JSON.parse(localStorage.getItem("courses")!) || [];
+    const employeeName = "Gustavo"; // Nome do funcionário autenticado
+    const filteredCourses = storedCourses.filter((course) => course.assignedEmployees?.includes(employeeName));
+    setAssignedCourses(filteredCourses);
+
+    // Carregar dados da empresa atribuída ao funcionário
+    const storedCompany = JSON.parse(localStorage.getItem("company"));
+    if (storedCompany && storedCompany.employees.includes(employeeName)) {
+      setCompany(storedCompany);
+    }
+  }, []);
 
   return (
-    <div>
-      {/* Adicionando a fonte Lusitana no projeto */}
+    <div >
       <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
-
-      <div className="flex flex-col lg:flex-row h-screen">
+      <div className="flex flex-col bg- bg-center   lg:flex-row h-screen"
+        style={{ 
+          backgroundImage: `url(${wallpaper2.src})`, 
+          backgroundSize: 'cover', 
+          backgroundRepeat: 'no-repeat',
+          
+        
+        }}>
         <Navbar role="func" />
+        <main className="justify-center w-full bg-transparent p-4 lg:p-8">
+          {/* Banner de Capa da Empresa */}
+          {company?.coverImage ? (
+            <div
+              className=" inset-0 w-full h-32 lg:h-40 rounded-xl mb-6 lg:mb-8 flex items-center justify-center bg- bg-center "
+              style={{ backgroundImage: `url(${company.coverImage})` }}
+            >
+              <h1 className="text-2xl lg:text-8xl text-gray-950  font-bold   px-4 py-2 rounded-md">
+                {company.name}
+              </h1>
+            </div>
+          ) : (
+            <div className="w-full bg-purple-600 h-32 lg:h-40 rounded-xl mb-6 lg:mb-8 flex items-center justify-center">
+              <p className="text-white text-lg lg:text-xl">Bem-vindo(a) à Formazzi!</p>
+            </div>
+          )}
 
-       {/* Seção Principal */}
-       <main className=" justify-center lg:w-3/4 bg-white p-4 lg:p-8 w-90">
-          {/* Banner */}
-          <div className="w-full bg-purple-600 h-32 lg:h-40 rounded-xl mb-6 lg:mb-8 flex items-center justify-center">
-            <h1 className="text-lg lg:text-2xl text-white font-semibold text-center">
-              Seja Bem Vindo à Formazzi
-            </h1>
-          </div>
-
-          {/* Conteúdo */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
-            {/* Coluna Esquerda: Continuar */}
-            <div className="bg-gray-100 p-4 lg:p-6 rounded-xl h-[20rem] lg:h-[30rem]">
-              <h2 className="text-lg lg:text-xl font-semibold mb-2 lg:mb-4">Continuar</h2>
-              <ul className="space-y-3 lg:space-y-4">
-                <li className="flex justify-between items-center">
-                  <span>Programação</span>
-                  <Link href="/programacao" className="text-blue-500 text-xl lg:text-2xl">
-                    →
-                  </Link>
-                </li>
-                <li className="flex justify-between items-center">
-                  <span>Como se comportar no mercado de trabalho</span>
-                  <Link href="/trabalho" className="text-blue-500 text-xl lg:text-2xl">
-                    →
-                  </Link>
-                </li>
-                <li className="flex justify-between items-center">
-                  <span>Inglês</span>
-                  <Link href="/ingles" className="text-blue-500 text-xl lg:text-2xl">
-                    →
-                  </Link>
-                </li>
-              </ul>
+          <div className="flex gap-4 lg:gap-8">
+            {/* Meus Cursos */}
+            <div className="bg-white/50 border shadow-xl border-slate-100 backdrop-blur-md  z-10 p-4 lg:p-6 rounded-xl w-96 lg:col-span-2">
+              <div className="flex flex-col">
+                <h2 className="text-lg lg:text-xl font-semibold mb-2 lg:mb-4">Meus Cursos</h2>
+                <Link href="/couses-func" className="text-blue-500 text-xl lg:text-2xl">
+                  →
+                </Link>
+              </div>
+              {assignedCourses.length === 0 ? (
+                <p className="text-gray-500">Nenhum curso atribuído.</p>
+              ) : (
+                <ul className="space-y-3 lg:space-y-4">
+                  {assignedCourses.map((course, index) => (
+                    <li key={index} className="flex justify-between items-center">
+                      <span>{course.title}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
-            {/* Coluna Direita: Meu Desempenho */}
-            <div className="bg-gray-100 p-4 lg:p-6 rounded-xl h-[20rem] lg:h-[30rem]">
-              <h2 className="text-lg lg:text-xl font-semibold mb-2 lg:mb-4">Meu Desempenho</h2>
-              <div className="flex justify-between items-end h-full space-x-2 lg:space-x-4">
-                {/* Gráfico de barras com cores destacadas */}
-                <div className="flex flex-col items-center">
-                  <div className="w-6 lg:w-10 h-32 lg:h-48 rounded-t-md" style={{ backgroundColor: "#FFD700" }}></div>
-                  <span className="text-xs lg:text-sm mt-1 lg:mt-2">Comunicação (56%)</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-6 lg:w-10 h-36 lg:h-56 rounded-t-md" style={{ backgroundColor: "#FF6347" }}></div>
-                  <span className="text-xs lg:text-sm mt-1 lg:mt-2">Inglês (60%)</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-6 lg:w-10 h-10 lg:h-16 rounded-t-md" style={{ backgroundColor: "#32CD32" }}></div>
-                  <span className="text-xs lg:text-sm mt-1 lg:mt-2">JavaScript (22%)</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-6 lg:w-10 h-64 lg:h-80 rounded-t-md" style={{ backgroundColor: "#8A2BE2" }}></div>
-                  <span className="text-xs lg:text-sm mt-1 lg:mt-2">Soft Skills (84%)</span>
-                </div>
+            
+
+            {/* Minha Progressão */}
+            <div className="w-full lg:w-11/12 shadow-xl  bg-white/50 border border-slate-100 backdrop-blur-md mt-4 lg:mt-6 p-4 md:p-6 rounded-xl">
+              <h2 className="text-md md:text-lg font-semibold mb-2 md:mb-4">Minha Progressão</h2>
+              <div className="space-y-3">
+                {assignedCourses.length > 0 ? (
+                  assignedCourses.map((course, idx) => (
+                    <div key={idx} className="flex items-center space-x-4">
+                      <div className="text-sm md:text-base flex-grow">{course.title}</div>
+                      <div className="h-4 bg-gray-200 rounded-full w-2/5">
+                        <div
+                          className="h-full bg-blue-500 rounded-full"
+                          style={{ width: `${course.progress}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-xs md:text-sm text-gray-500">{course.progress}%</span>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500">Nenhum curso encontrado.</p>
+                )}
               </div>
             </div>
           </div>

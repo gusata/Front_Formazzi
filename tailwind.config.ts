@@ -1,6 +1,7 @@
 import { Flowbite } from "flowbite-react";
 import type { Config } from "tailwindcss";
 const flowbite = require("flowbite-react/tailwind");
+import wallpaper from "/wallpaper.png"
 
 const config: Config = {
 
@@ -13,6 +14,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'wallpaper': "url('/wallpaper2.png')",
+      },
       fontFamily: {
         lusitana: ['Lusitana', 'serif'],
         crimson: ['CrimsonText', 'serif'],

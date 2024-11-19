@@ -10,8 +10,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className={''} id="content">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <nav className="bg-yellow-50 border-b-2  border-primary">
+      <nav className="bg-yellow-50 border-b-2 absolute w-screen z-50  border-primary">
         <div className="mx-4 px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <Image src={logo} alt="logo" className="size-[13rem] mb-[0.5rem] sm:size-[8rem] md:size-[8rem]" />

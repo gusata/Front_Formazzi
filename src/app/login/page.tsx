@@ -87,10 +87,11 @@ export default function Login() {
                                 required
                             />
 
-                            {/* Botão de envio */}
-                            <button type="submit" className="bg-[#A38DEB] border-2 border-registerbt h-9 w-[10rem] rounded-full font-crimson font-semibold text-lg text-yellow-50 active:bg-transparent active:text-registerbt transition">
-                                Entrar
-                            </button>
+<Link href={"/workpage-adm"}>
+                                <button type="submit" className="bg-[#A38DEB] border-2 border-registerbt h-9 w-[10rem] rounded-full font-crimson font-semibold text-lg text-yellow-50 active:bg-transparent active:text-registerbt transition">
+                                    Entrar
+                                </button>
+                            </Link>
 
                             {/* Link para alternar para funcionário */}
                             <button type="button" onClick={changevisiformadm} className="text font-crimson text-sm text-blue-500 hover:underline" id="change">

@@ -46,6 +46,7 @@ html {
 
 #content{
   cursor: none;
+  overflow-Y: auto;
 
 }
 
